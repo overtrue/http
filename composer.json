@@ -1,6 +1,6 @@
 {
     "name": "overtrue/http",
-    "description": "A base http client.",
+    "description": "A simple http client wrapper.",
     "type": "library",
     "require": {
         "php": ">=7.0",

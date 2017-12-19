@@ -2,7 +2,7 @@
     <h1 align="center">Http</h1>
 </p>
 
-<p align="center">A basic http client wrapper.</p>
+<p align="center">A simple http client wrapper.</p>
 
 ## Installing
 

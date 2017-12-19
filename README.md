@@ -13,6 +13,10 @@ $ composer require overtrue/http -vvv
 ## Usage
 
 ```php
+<?php
+
+use Overtrue\Http\Client;
+
 $client = Client::create(); 
 
 $response = $client->get('https://httpbin.org/ip');

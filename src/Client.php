@@ -33,6 +33,11 @@ class Client
     protected $config;
 
     /**
+     * @var \Monolog\Logger
+     */
+    protected $logger;
+
+    /**
      * @var
      */
     protected $baseUri;
@@ -139,7 +144,7 @@ class Client
 
         $response = $this->performRequest($url, $method, $options);
 
-        return $returnRaw ? $response : $this->castResponseToType($response, $this->app->config->get('response_type'));
+        return $returnRaw ? $response : $this->castResponseToType($response, $this->config->getOption('response_type'));
     }
 
     /**
@@ -181,6 +186,26 @@ class Client
     }
 
     /**
+     * @param \Monolog\Logger $logger
+     *
+     * @return $this
+     */
+    public function setLogger(Logger $logger)
+    {
+        $this->logger = $logger;
+
+        return $this;
+    }
+
+    /**
+     * @return \Monolog\Logger
+     */
+    public function getLogger(): Logger
+    {
+        return $this->logger ?? $this->logger = new Logger('overtrue-http');
+    }
+
+    /**
      * Log the request.
      *
      * @return \Closure
@@ -189,6 +214,6 @@ class Client
     {
         $formatter = new MessageFormatter($this->config->getOption('http.log_template', MessageFormatter::DEBUG));
 
-        return Middleware::log($this->app['logger'], $formatter);
+        return Middleware::log($this->getLogger(), $formatter);
     }
 }

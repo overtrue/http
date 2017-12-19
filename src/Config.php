@@ -1,0 +1,198 @@
+<?php
+
+/*
+ * This file is part of the overtrue/http.
+ *
+ * (c) overtrue <i@overtrue.me>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+namespace Overtrue\Http;
+
+/**
+ * Class Config.
+ *
+ * @author overtrue <i@overtrue.me>
+ */
+class Config
+{
+    /**
+     * @see http://docs.guzzlephp.org/en/latest/request-options.html
+     *
+     * @var array
+     */
+    protected $options = [
+        'base_uri' => null,
+        'timeout' => 3000,
+        'connect_timeout' => 3000,
+        'proxy' => [],
+    ];
+
+    /**
+     * Config constructor.
+     *
+     * @param array $options
+     */
+    public function __construct(array $options = [])
+    {
+        $this->options = array_merge($this->options, $options);
+    }
+
+    /**
+     * @return string
+     */
+    public function getBaseUri()
+    {
+        return $this->options['base_uri'] ?? null;
+    }
+
+    /**
+     * @param string $baseUri
+     *
+     * @return \Overtrue\Http\Config
+     */
+    public function setBaseUri($baseUri)
+    {
+        $this->options['base_uri'] = $baseUri;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTimeout()
+    {
+        return $this->options['timeout'] ?? 3000;
+    }
+
+    /**
+     * @param int $timeout
+     *
+     * @return \Overtrue\Http\Config
+     */
+    public function setTimeout($timeout)
+    {
+        $this->options['timeout'] = $timeout;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getConnectTimeout()
+    {
+        return $this->options['connect_timeout'] ?? 3000;
+    }
+
+    /**
+     * @param int $connectTimeout
+     *
+     * @return \Overtrue\Http\Config
+     */
+    public function setConnectTimeout($connectTimeout)
+    {
+        $this->options['connect_timeout'] = $connectTimeout;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getProxy()
+    {
+        return $this->options['proxy'] ?? [];
+    }
+
+    /**
+     * @param array $proxy
+     *
+     * @return \Overtrue\Http\Config
+     */
+    public function setProxy(array $proxy)
+    {
+        $this->options['proxy'] = $proxy;
+
+        return $this;
+    }
+
+    /**
+     * 返回配置数据.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->options;
+    }
+
+    /**
+     * 设置属性.
+     *
+     * @param string $key
+     * @param mixed  $value
+     *
+     * @return $this
+     */
+    public function setOption($key, $value)
+    {
+        $this->options[$key] = $value;
+
+        return $this;
+    }
+
+    /**
+     * 获取选项.
+     *
+     * @param string $key
+     * @param mixed  $default
+     *
+     * @return mixed
+     */
+    public function getOption($key, $default = null)
+    {
+        return $this->options[$key] ?? $default;
+    }
+
+    /**
+     * 批量设置.
+     *
+     * @param array $options
+     *
+     * @return $this
+     */
+    public function mergeOptions(array $options)
+    {
+        $this->options = array_merge($this->options, $options);
+
+        return $this;
+    }
+
+    /**
+     * 替换设置.
+     *
+     * @param array $options
+     *
+     * @return $this
+     */
+    public function setOptions(array $options)
+    {
+        $this->options = $options;
+
+        return $this;
+    }
+
+    /**
+     * 获取全部设置.
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+}

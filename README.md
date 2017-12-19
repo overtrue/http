@@ -6,7 +6,7 @@
 
 ## Installing
 
-```php
+```shell
 $ composer require overtrue/http -vvv
 ```
 

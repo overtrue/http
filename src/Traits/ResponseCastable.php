@@ -50,9 +50,9 @@ trait ResponseCastable
      * @param mixed       $response
      * @param string|null $type
      *
-     * @return array|\Overtrue\Http\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
-     *
      * @throws \Overtrue\Http\Exceptions\InvalidArgumentException
+     *
+     * @return array|\Overtrue\Http\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
      */
     protected function detectAndCastResponseToType($response, $type = null)
     {

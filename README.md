@@ -25,6 +25,35 @@ $response = $client->get('https://httpbin.org/ip');
 //}
 ```
 
+Using configuration:
+
+```php
+
+use Overtrue\Http\Client;
+use Overtrue\Http\Config;
+
+$config = new Config([
+    'base_uri' => 'https://www.easywechat.com/apiV2/',
+    'timeout' => 3000,
+    //'connect_timeout' => 3000,
+]);
+
+$client = Client::create($config); // or new Client($config);
+
+//...
+```
+
+Custom response_type:
+
+```php
+$config = new Config([
+    'base_uri' => 'https://www.easywechat.com/apiV2/',
+
+    'response_type' => 'collection', // array(default)/collection/object/raw
+]);
+```
+//...
+
 ## License
 
 MIT

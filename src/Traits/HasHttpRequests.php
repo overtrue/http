@@ -127,15 +127,27 @@ trait HasHttpRequests
     }
 
     /**
+     * @param array $middlewares
+     *
+     * @return \GuzzleHttp\Client
+     */
+    public function setMiddlewares(array $middlewares): Client
+    {
+        $this->middlewares = $middlewares;
+
+        return $this;
+    }
+
+    /**
      * Make a request.
      *
-     * @param string $url
+     * @param string $uri
      * @param string $method
      * @param array  $options
      *
      * @return \Psr\Http\Message\ResponseInterface|\Overtrue\Http\Support\Collection|array|object|string
      */
-    public function request($url, $method = 'GET', $options = []): ResponseInterface
+    public function request($uri, $method = 'GET', $options = []): ResponseInterface
     {
         $method = strtoupper($method);
 
@@ -143,11 +155,7 @@ trait HasHttpRequests
 
         $options = $this->fixJsonIssue($options);
 
-        if (property_exists($this, 'baseUri') && !is_null($this->baseUri)) {
-            $options['base_uri'] = $this->baseUri;
-        }
-
-        $response = $this->getHttpClient()->request($method, $url, $options);
+        $response = $this->getHttpClient()->request($method, $uri, $options);
         $response->getBody()->rewind();
 
         return $response;

@@ -129,20 +129,28 @@ class Client
     }
 
     /**
-     * @param string $url
+     * @param string $uri
      * @param string $method
      * @param array  $options
      * @param bool   $returnRaw
      *
      * @return \Psr\Http\Message\ResponseInterface|\Overtrue\Http\Support\Collection|array|object|string
      */
-    public function request(string $url, string $method = 'GET', array $options = [], $returnRaw = false)
+    public function request(string $uri, string $method = 'GET', array $options = [], $returnRaw = false)
     {
+        if (property_exists($this, 'baseUri') && !is_null($this->baseUri)) {
+            $options['base_uri'] = $this->baseUri;
+        }
+
+        if ((!empty($options['base_uri']) || $this->config->getBaseUri()) && $this->config->needAutoTrimEndpointSlash()) {
+            $uri = ltrim($uri, '/');
+        }
+
         if (empty($this->middlewares)) {
             $this->pushMiddleware($this->logMiddleware(), 'log');
         }
 
-        $response = $this->performRequest($url, $method, $options);
+        $response = $this->performRequest($uri, $method, $options);
 
         return $returnRaw ? $response : $this->castResponseToType($response, $this->config->getOption('response_type'));
     }
@@ -179,7 +187,7 @@ class Client
     public function getHttpClient(): GuzzleClient
     {
         if (!($this->httpClient instanceof GuzzleClient)) {
-            $this->httpClient = new GuzzleClient();
+            $this->httpClient = new GuzzleClient($this->config->toArray());
         }
 
         return $this->httpClient;

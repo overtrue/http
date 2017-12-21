@@ -31,6 +31,11 @@ class Config
     ];
 
     /**
+     * @var bool
+     */
+    protected $autoTrimEndpointSlash = true;
+
+    /**
      * Config constructor.
      *
      * @param array $options
@@ -121,8 +126,6 @@ class Config
     }
 
     /**
-     * 返回配置数据.
-     *
      * @return array
      */
     public function toArray()
@@ -131,8 +134,6 @@ class Config
     }
 
     /**
-     * 设置属性.
-     *
      * @param string $key
      * @param mixed  $value
      *
@@ -146,8 +147,6 @@ class Config
     }
 
     /**
-     * 获取选项.
-     *
      * @param string $key
      * @param mixed  $default
      *
@@ -159,8 +158,6 @@ class Config
     }
 
     /**
-     * 批量设置.
-     *
      * @param array $options
      *
      * @return $this
@@ -173,8 +170,6 @@ class Config
     }
 
     /**
-     * 替换设置.
-     *
      * @param array $options
      *
      * @return $this
@@ -187,12 +182,28 @@ class Config
     }
 
     /**
-     * 获取全部设置.
-     *
      * @return array
      */
     public function getOptions()
     {
         return $this->options;
+    }
+
+    /**
+     * @return bool
+     */
+    public function needAutoTrimEndpointSlash()
+    {
+        return $this->autoTrimEndpointSlash;
+    }
+
+    /**
+     * @return $this
+     */
+    public function disableAutoTrimEndpointSlash()
+    {
+        $this->autoTrimEndpointSlash = false;
+
+        return $this;
     }
 }

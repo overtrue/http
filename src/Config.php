@@ -48,9 +48,9 @@ class Config
     /**
      * @return string
      */
-    public function getBaseUri()
+    public function getBaseUri(): string
     {
-        return $this->options['base_uri'] ?? null;
+        return $this->options['base_uri'] ?? '';
     }
 
     /**
@@ -58,7 +58,7 @@ class Config
      *
      * @return \Overtrue\Http\Config
      */
-    public function setBaseUri($baseUri)
+    public function setBaseUri($baseUri): \Overtrue\Http\Config
     {
         $this->options['base_uri'] = $baseUri;
 
@@ -68,7 +68,7 @@ class Config
     /**
      * @return int
      */
-    public function getTimeout()
+    public function getTimeout(): int
     {
         return $this->options['timeout'] ?? 3000;
     }
@@ -78,7 +78,7 @@ class Config
      *
      * @return \Overtrue\Http\Config
      */
-    public function setTimeout($timeout)
+    public function setTimeout($timeout): \Overtrue\Http\Config
     {
         $this->options['timeout'] = $timeout;
 
@@ -88,7 +88,7 @@ class Config
     /**
      * @return int
      */
-    public function getConnectTimeout()
+    public function getConnectTimeout(): int
     {
         return $this->options['connect_timeout'] ?? 3000;
     }
@@ -98,7 +98,7 @@ class Config
      *
      * @return \Overtrue\Http\Config
      */
-    public function setConnectTimeout($connectTimeout)
+    public function setConnectTimeout($connectTimeout): \Overtrue\Http\Config
     {
         $this->options['connect_timeout'] = $connectTimeout;
 
@@ -108,7 +108,7 @@ class Config
     /**
      * @return array
      */
-    public function getProxy()
+    public function getProxy(): array
     {
         return $this->options['proxy'] ?? [];
     }
@@ -118,7 +118,7 @@ class Config
      *
      * @return \Overtrue\Http\Config
      */
-    public function setProxy(array $proxy)
+    public function setProxy(array $proxy): \Overtrue\Http\Config
     {
         $this->options['proxy'] = $proxy;
 
@@ -128,7 +128,7 @@ class Config
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->options;
     }
@@ -139,7 +139,7 @@ class Config
      *
      * @return $this
      */
-    public function setOption($key, $value)
+    public function setOption($key, $value): \Overtrue\Http\Config
     {
         $this->options[$key] = $value;
 
@@ -152,7 +152,7 @@ class Config
      *
      * @return mixed
      */
-    public function getOption($key, $default = null)
+    public function getOption($key, $default = null): mixed
     {
         return $this->options[$key] ?? $default;
     }
@@ -162,7 +162,7 @@ class Config
      *
      * @return $this
      */
-    public function mergeOptions(array $options)
+    public function mergeOptions(array $options): \Overtrue\Http\Config
     {
         $this->options = array_merge($this->options, $options);
 
@@ -174,7 +174,7 @@ class Config
      *
      * @return $this
      */
-    public function setOptions(array $options)
+    public function setOptions(array $options): \Overtrue\Http\Config
     {
         $this->options = $options;
 
@@ -184,7 +184,7 @@ class Config
     /**
      * @return array
      */
-    public function getOptions()
+    public function getOptions(): array
     {
         return $this->options;
     }
@@ -192,7 +192,7 @@ class Config
     /**
      * @return bool
      */
-    public function needAutoTrimEndpointSlash()
+    public function needAutoTrimEndpointSlash(): bool
     {
         return $this->autoTrimEndpointSlash;
     }
@@ -200,7 +200,7 @@ class Config
     /**
      * @return $this
      */
-    public function disableAutoTrimEndpointSlash()
+    public function disableAutoTrimEndpointSlash(): \Overtrue\Http\Config
     {
         $this->autoTrimEndpointSlash = false;
 

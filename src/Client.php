@@ -172,7 +172,7 @@ class Client
      *
      * @return \Overtrue\Http\Client
      */
-    public function setHttpClient(GuzzleClient $client): self
+    public function setHttpClient(GuzzleClient $client): \Overtrue\Http\Client
     {
         $this->httpClient = $client;
 
@@ -184,7 +184,7 @@ class Client
      *
      * @return \GuzzleHttp\Client
      */
-    public function getHttpClient(): GuzzleClient
+    public function getHttpClient(): \GuzzleHttp\Client
     {
         if (!($this->httpClient instanceof GuzzleClient)) {
             $this->httpClient = new GuzzleClient($this->config->toArray());
@@ -194,11 +194,31 @@ class Client
     }
 
     /**
+     * @return \Overtrue\Http\Config
+     */
+    public function getConfig(): \Overtrue\Http\Config
+    {
+        return $this->config;
+    }
+
+    /**
+     * @param \Overtrue\Http\Config $config
+     *
+     * @return \Overtrue\Http\Client
+     */
+    public function setConfig(\Overtrue\Http\Config $config): \Overtrue\Http\Client
+    {
+        $this->config = $config;
+
+        return $this;
+    }
+
+    /**
      * @param \Monolog\Logger $logger
      *
      * @return $this
      */
-    public function setLogger(Logger $logger)
+    public function setLogger(Logger $logger): \Overtrue\Http\Client
     {
         $this->logger = $logger;
 
@@ -208,7 +228,7 @@ class Client
     /**
      * @return \Monolog\Logger
      */
-    public function getLogger(): Logger
+    public function getLogger(): \Monolog\Logger
     {
         return $this->logger ?? $this->logger = new Logger('overtrue-http');
     }
@@ -218,7 +238,7 @@ class Client
      *
      * @return \Closure
      */
-    protected function logMiddleware()
+    protected function logMiddleware(): \Closure
     {
         $formatter = new MessageFormatter($this->config->getOption('http.log_template', MessageFormatter::DEBUG));
 

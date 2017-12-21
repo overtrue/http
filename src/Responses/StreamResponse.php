@@ -25,11 +25,11 @@ class StreamResponse extends Response
      * @param string $directory
      * @param string $filename
      *
-     * @return bool|int
+     * @return string
      *
      * @throws \Overtrue\Http\Exceptions\InvalidArgumentException
      */
-    public function save(string $directory, string $filename = '')
+    public function save(string $directory, string $filename = ''): string
     {
         $this->getBody()->rewind();
 
@@ -66,9 +66,11 @@ class StreamResponse extends Response
      * @param string $directory
      * @param string $filename
      *
-     * @return bool|int
+     * @return string
+     *
+     * @throws \Overtrue\Http\Exceptions\InvalidArgumentException
      */
-    public function saveAs(string $directory, string $filename)
+    public function saveAs(string $directory, string $filename): string
     {
         return $this->save($directory, $filename);
     }

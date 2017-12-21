@@ -26,7 +26,7 @@ class Response extends GuzzleResponse
     /**
      * @return string
      */
-    public function getBodyContents()
+    public function getBodyContents(): string
     {
         $this->getBody()->rewind();
         $contents = $this->getBody()->getContents();
@@ -38,9 +38,9 @@ class Response extends GuzzleResponse
     /**
      * @param \Psr\Http\Message\ResponseInterface $response
      *
-     * @return \Overtrue\Http\Http\Response
+     * @return \Overtrue\Http\Responses\Response
      */
-    public static function buildFromPsrResponse(ResponseInterface $response)
+    public static function buildFromPsrResponse(ResponseInterface $response): \Overtrue\Http\Responses\Response
     {
         return new static(
             $response->getStatusCode(),
@@ -56,7 +56,7 @@ class Response extends GuzzleResponse
      *
      * @return string
      */
-    public function toJson()
+    public function toJson(): string
     {
         return json_encode($this->toArray());
     }
@@ -66,7 +66,7 @@ class Response extends GuzzleResponse
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $content = $this->getBodyContents();
 
@@ -88,7 +88,7 @@ class Response extends GuzzleResponse
      *
      * @return \Overtrue\Http\Support\Collection
      */
-    public function toCollection()
+    public function toCollection(): \Overtrue\Http\Support\Collection
     {
         return new Collection($this->toArray());
     }
@@ -96,15 +96,15 @@ class Response extends GuzzleResponse
     /**
      * @return object
      */
-    public function toObject()
+    public function toObject(): object
     {
         return json_decode($this->getBodyContents());
     }
 
     /**
-     * @return bool|string
+     * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getBodyContents();
     }

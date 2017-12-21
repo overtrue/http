@@ -25,9 +25,9 @@ class StreamResponse extends Response
      * @param string $directory
      * @param string $filename
      *
-     * @return string
-     *
      * @throws \Overtrue\Http\Exceptions\InvalidArgumentException
+     *
+     * @return string
      */
     public function save(string $directory, string $filename = ''): string
     {
@@ -66,9 +66,9 @@ class StreamResponse extends Response
      * @param string $directory
      * @param string $filename
      *
-     * @return string
-     *
      * @throws \Overtrue\Http\Exceptions\InvalidArgumentException
+     *
+     * @return string
      */
     public function saveAs(string $directory, string $filename): string
     {

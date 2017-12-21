@@ -116,7 +116,7 @@ class Client
 
         foreach ($files as $name => $path) {
             $multipart[] = [
-                'name' => $name,
+                'name'     => $name,
                 'contents' => fopen($path, 'r'),
             ];
         }

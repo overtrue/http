@@ -25,9 +25,9 @@ class StreamResponse extends Response
      * @param string $directory
      * @param string $filename
      *
-     * @return bool|int
-     *
      * @throws \Overtrue\Http\Exceptions\InvalidArgumentException
+     *
+     * @return bool|int
      */
     public function save(string $directory, string $filename = '')
     {

@@ -43,16 +43,18 @@ $client = Client::create($config); // or new Client($config);
 //...
 ```
 
-Custom response_type:
+Custom response type:
 
 ```php
 $config = new Config([
     'base_uri' => 'https://www.easywechat.com/apiV2/',
-
-    'response_type' => 'collection', // array(default)/collection/object/raw
+    
+    // array(default)/collection/object/raw
+    'response_type' => 'collection', 
 ]);
-```
+
 //...
+```
 
 ## License
 

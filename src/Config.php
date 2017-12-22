@@ -152,7 +152,7 @@ class Config
      *
      * @return mixed
      */
-    public function getOption($key, $default = null): mixed
+    public function getOption($key, $default = null)
     {
         return $this->options[$key] ?? $default;
     }

@@ -4,6 +4,20 @@
 
 <p align="center"> :cactus: A simple http client wrapper.</p>
 
+<p align="center">
+<a href="https://travis-ci.org/overtrue/http"><img src="https://travis-ci.org/overtrue/http.svg?branch=master" alt="Build Status"></a>
+<a href="https://packagist.org/packages/overtrue/http"><img src="https://poser.pugx.org/overtrue/http/v/stable.svg" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/overtrue/http"><img src="https://poser.pugx.org/overtrue/http/v/unstable.svg" alt="Latest Unstable Version"></a>
+<a href="https://scrutinizer-ci.com/g/overtrue/http/build-status/master"><img src="https://scrutinizer-ci.com/g/overtrue/http/badges/build.png?b=master" alt="Build Status"></a>
+<a href="https://scrutinizer-ci.com/g/overtrue/http/?branch=master"><img src="https://scrutinizer-ci.com/g/overtrue/http/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"></a>
+<a href="https://scrutinizer-ci.com/g/overtrue/http/?branch=master"><img src="https://scrutinizer-ci.com/g/overtrue/http/badges/coverage.png?b=master" alt="Code Coverage"></a>
+<a href="https://packagist.org/packages/overtrue/http"><img src="https://poser.pugx.org/overtrue/http/downloads" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/overtrue/http"><img src="https://poser.pugx.org/overtrue/http/license" alt="License"></a>
+<a href="#backers"><img src="https://opencollective.com/http/backers/badge.svg" alt="Backers on Open Collective"></a>
+<a href="#sponsors"><img src="https://opencollective.com/http/sponsors/badge.svg" alt="Sponsors on Open Collective"></a>
+<a href="https://app.fossa.io/projects/git%2Bgithub.com%2Fovertrue%2Fhttp?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Fovertrue%2Fhttp.svg?type=shield"/></a>
+</p>
+
 ## Installing
 
 ```shell
@@ -25,14 +39,14 @@ $response = $client->get('https://httpbin.org/ip');
 //}
 ```
 
-Using configuration:
+### Configuration:
 
 ```php
 
 use Overtrue\Http\Client;
 
 $config = [
-    'base_uri' => 'https://www.easywechat.com/apiV2/',
+    'base_uri' => 'https://www.easyhttp.com/apiV2/',
     'timeout' => 3000,
     //'connect_timeout' => 3000,
 ];
@@ -42,11 +56,11 @@ $client = Client::create($config); // or new Client($config);
 //...
 ```
 
-Custom response type:
+### Custom response type
 
 ```php
 $config = new Config([
-    'base_uri' => 'https://www.easywechat.com/apiV2/',
+    'base_uri' => 'https://www.easyhttp.com/apiV2/',
     
     // array(default)/collection/object/raw
     'response_type' => 'collection', 
@@ -55,7 +69,7 @@ $config = new Config([
 //...
 ```
 
-### Logging request and response:
+### Logging request and response
 
 
 ```php

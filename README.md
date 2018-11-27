@@ -13,9 +13,6 @@
 <a href="https://scrutinizer-ci.com/g/overtrue/http/?branch=master"><img src="https://scrutinizer-ci.com/g/overtrue/http/badges/coverage.png?b=master" alt="Code Coverage"></a>
 <a href="https://packagist.org/packages/overtrue/http"><img src="https://poser.pugx.org/overtrue/http/downloads" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/overtrue/http"><img src="https://poser.pugx.org/overtrue/http/license" alt="License"></a>
-<a href="#backers"><img src="https://opencollective.com/http/backers/badge.svg" alt="Backers on Open Collective"></a>
-<a href="#sponsors"><img src="https://opencollective.com/http/sponsors/badge.svg" alt="Sponsors on Open Collective"></a>
-<a href="https://app.fossa.io/projects/git%2Bgithub.com%2Fovertrue%2Fhttp?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Fovertrue%2Fhttp.svg?type=shield"/></a>
 </p>
 
 ## Installing

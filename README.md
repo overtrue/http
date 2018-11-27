@@ -30,13 +30,12 @@ Using configuration:
 ```php
 
 use Overtrue\Http\Client;
-use Overtrue\Http\Config;
 
-$config = new Config([
+$config = [
     'base_uri' => 'https://www.easywechat.com/apiV2/',
     'timeout' => 3000,
     //'connect_timeout' => 3000,
-]);
+];
 
 $client = Client::create($config); // or new Client($config);
 
@@ -54,6 +53,28 @@ $config = new Config([
 ]);
 
 //...
+```
+
+### Logging request and response:
+
+
+```php
+use Overtrue\Http\Client;
+
+$client = Client::create();
+
+$logger = new \Monolog\Logger('my-logger');
+
+$logger->pushHandler(
+    new \Monolog\Handler\RotatingFileHandler('/tmp/my-log.log')
+);
+
+$client->pushMiddleware(\GuzzleHttp\Middleware::log(
+                            $logger,
+                            new \GuzzleHttp\MessageFormatter(\GuzzleHttp\MessageFormatter::DEBUG)
+                        ));
+
+$response = $client->get('https://httpbin.org/ip');
 ```
 
 ## License

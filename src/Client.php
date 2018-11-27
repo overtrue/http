@@ -12,9 +12,6 @@
 namespace Overtrue\Http;
 
 use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\MessageFormatter;
-use GuzzleHttp\Middleware;
-use Monolog\Logger;
 use Overtrue\Http\Responses\Response;
 use Overtrue\Http\Traits\HasHttpRequests;
 
@@ -33,11 +30,6 @@ class Client
     protected $config;
 
     /**
-     * @var \Monolog\Logger
-     */
-    protected $logger;
-
-    /**
      * @var
      */
     protected $baseUri;
@@ -53,11 +45,11 @@ class Client
     /**
      * Client constructor.
      *
-     * @param \Overtrue\Http\Config| $config
+     * @param \Overtrue\Http\Config|array $config
      */
-    public function __construct(Config $config = null)
+    public function __construct($config = [])
     {
-        $this->config = $config ?? new Config();
+        $this->config = $this->normalizeConfig($config);
     }
 
     /**
@@ -116,7 +108,7 @@ class Client
 
         foreach ($files as $name => $path) {
             $multipart[] = [
-                'name'     => $name,
+                'name' => $name,
                 'contents' => fopen($path, 'r'),
             ];
         }
@@ -144,10 +136,6 @@ class Client
 
         if ((!empty($options['base_uri']) || $this->config->getBaseUri()) && $this->config->needAutoTrimEndpointSlash()) {
             $uri = ltrim($uri, '/');
-        }
-
-        if (empty($this->middlewares)) {
-            $this->pushMiddleware($this->logMiddleware(), 'log');
         }
 
         $response = $this->performRequest($uri, $method, $options);
@@ -214,34 +202,20 @@ class Client
     }
 
     /**
-     * @param \Monolog\Logger $logger
+     * @param mixed $config
      *
-     * @return $this
+     * @return \Overtrue\Http\Config
      */
-    public function setLogger(Logger $logger): \Overtrue\Http\Client
+    protected function normalizeConfig($config): \Overtrue\Http\Config
     {
-        $this->logger = $logger;
+        if (\is_array($config)) {
+            $config = new Config($config);
+        }
 
-        return $this;
-    }
+        if (!($config instanceof Config)) {
+            throw new \InvalidArgumentException('config must be array or instance of Overtrue\Http\Config.');
+        }
 
-    /**
-     * @return \Monolog\Logger
-     */
-    public function getLogger(): \Monolog\Logger
-    {
-        return $this->logger ?? $this->logger = new Logger('overtrue-http');
-    }
-
-    /**
-     * Log the request.
-     *
-     * @return \Closure
-     */
-    protected function logMiddleware(): \Closure
-    {
-        $formatter = new MessageFormatter($this->config->getOption('http.log_template', MessageFormatter::DEBUG));
-
-        return Middleware::log($this->getLogger(), $formatter);
+        return $config;
     }
 }

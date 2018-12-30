@@ -198,11 +198,11 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
         if (is_null($key)) {
             return $array;
         }
-        if (array_key_exists($array, $key)) {
+        if (array_key_exists($key, $array)) {
             return $array[$key];
         }
         foreach (explode('.', $key) as $segment) {
-            if (array_key_exists($array, $segment)) {
+            if (array_key_exists($segment, $array)) {
                 $array = $array[$segment];
             } else {
                 return $default;
@@ -245,7 +245,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
         }
 
         foreach ($keys as $key) {
-            if (array_key_exists($array, $key)) {
+            if (array_key_exists($key, $array)) {
                 unset($array[$key]);
                 continue;
             }

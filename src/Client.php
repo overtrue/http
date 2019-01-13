@@ -12,7 +12,6 @@
 namespace Overtrue\Http;
 
 use GuzzleHttp\Client as GuzzleClient;
-use Overtrue\Http\Responses\Response;
 use Overtrue\Http\Traits\HasHttpRequests;
 
 /**
@@ -140,7 +139,9 @@ class Client
 
         $response = $this->performRequest($uri, $method, $options);
 
-        return $returnRaw ? $response : $this->castResponseToType($response, $this->config->getOption('response_type'));
+        return $this->castResponseToType(
+            $response, $returnRaw ? 'raw' : $this->config->getOption('response_type')
+        );
     }
 
     /**
@@ -152,7 +153,7 @@ class Client
      */
     public function requestRaw(string $url, string $method = 'GET', array $options = [])
     {
-        return Response::buildFromPsrResponse($this->request($url, $method, $options, true));
+        return $this->request($url, $method, $options, true);
     }
 
     /**

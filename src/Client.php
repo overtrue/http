@@ -108,7 +108,7 @@ class Client
 
         foreach ($files as $name => $path) {
             $multipart[] = [
-                'name'     => $name,
+                'name' => $name,
                 'contents' => fopen($path, 'r'),
             ];
         }
@@ -156,25 +156,13 @@ class Client
     }
 
     /**
-     * @param \GuzzleHttp\Client $client
-     *
-     * @return \Overtrue\Http\Client
-     */
-    public function setHttpClient(GuzzleClient $client): \Overtrue\Http\Client
-    {
-        $this->httpClient = $client;
-
-        return $this;
-    }
-
-    /**
      * Return GuzzleHttp\Client instance.
      *
-     * @return \GuzzleHttp\Client
+     * @return \GuzzleHttp\ClientInterface
      */
-    public function getHttpClient(): \GuzzleHttp\Client
+    public function getHttpClient(): \GuzzleHttp\ClientInterface
     {
-        if (!($this->httpClient instanceof GuzzleClient)) {
+        if (!$this->httpClient) {
             $this->httpClient = new GuzzleClient($this->config->toArray());
         }
 

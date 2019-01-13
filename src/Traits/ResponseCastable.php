@@ -31,6 +31,10 @@ trait ResponseCastable
      */
     protected function castResponseToType(ResponseInterface $response, $type = null)
     {
+        if ('raw' === $type) {
+            return $response;
+        }
+
         $response = Response::buildFromPsrResponse($response);
         $response->getBody()->rewind();
 
@@ -41,8 +45,6 @@ trait ResponseCastable
                 return $response->toArray();
             case 'object':
                 return $response->toObject();
-            case 'raw':
-                return $response;
         }
     }
 

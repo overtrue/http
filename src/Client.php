@@ -21,7 +21,9 @@ use Overtrue\Http\Traits\HasHttpRequests;
  */
 class Client
 {
-    use HasHttpRequests { request as performRequest; }
+    use HasHttpRequests {
+        request as performRequest;
+    }
 
     /**
      * @var \Overtrue\Http\Config
@@ -107,13 +109,13 @@ class Client
 
         foreach ($files as $name => $path) {
             $multipart[] = [
-                'name'     => $name,
+                'name' => $name,
                 'contents' => fopen($path, 'r'),
             ];
         }
 
         foreach ($form as $name => $contents) {
-            $multipart[] = compact('name', 'contents');
+            $multipart = array_merge($multipart, $this->transformMultipartUploadData($name, $contents));
         }
 
         return $this->request($url, 'POST', ['query' => $query, 'multipart' => $multipart]);
@@ -140,7 +142,8 @@ class Client
         $response = $this->performRequest($uri, $method, $options);
 
         return $this->castResponseToType(
-            $response, $returnRaw ? 'raw' : $this->config->getOption('response_type')
+            $response,
+            $returnRaw ? 'raw' : $this->config->getOption('response_type')
         );
     }
 
@@ -188,6 +191,39 @@ class Client
         $this->config = $config;
 
         return $this;
+    }
+
+    /**
+     * Transform Multipart Upload Data.
+     *
+     * @param string|int         $name
+     * @param string|array|mixed $contents
+     *
+     * @return array
+     */
+    protected function transformMultipartUploadData($name, $contents)
+    {
+        if (!is_array($contents)) {
+            return [[
+                'name' => $name,
+                'contents' => $contents,
+            ]];
+        }
+
+        $datas = [];
+        foreach ($contents as $key => $value) {
+            $key = $name.'['.$key.']';
+            if (is_array($value)) {
+                $datas = array_merge($datas, $this->transformMultipartUploadData($key, $value));
+            } else {
+                $datas[] = [
+                    'name' => $key,
+                    'contents' => $value,
+                ];
+            }
+        }
+
+        return $datas;
     }
 
     /**

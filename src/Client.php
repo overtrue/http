@@ -107,10 +107,15 @@ class Client
     {
         $multipart = [];
 
-        foreach (\array_merge($files, $form) as $name => $contents) {
+        foreach ($files as $name => $contents) {
+            $contents = \is_resource($contents) ?: \fopen($contents, 'r');
+            $multipart[] = \compact('name', 'contents');
+        }
+
+        foreach ($form as $name => $contents) {
             $multipart = array_merge($multipart, $this->normalizeMultipartField($name, $contents));
         }
-        
+
         return $this->request($url, 'POST', ['query' => $query, 'multipart' => $multipart]);
     }
 

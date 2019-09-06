@@ -21,7 +21,9 @@ use Overtrue\Http\Traits\HasHttpRequests;
  */
 class Client
 {
-    use HasHttpRequests { request as performRequest; }
+    use HasHttpRequests {
+        request as performRequest;
+    }
 
     /**
      * @var \Overtrue\Http\Config
@@ -105,15 +107,13 @@ class Client
     {
         $multipart = [];
 
-        foreach ($files as $name => $path) {
-            $multipart[] = [
-                'name'     => $name,
-                'contents' => fopen($path, 'r'),
-            ];
+        foreach ($files as $name => $contents) {
+            $contents = \is_resource($contents) ?: \fopen($contents, 'r');
+            $multipart[] = \compact('name', 'contents');
         }
 
         foreach ($form as $name => $contents) {
-            $multipart[] = compact('name', 'contents');
+            $multipart = array_merge($multipart, $this->normalizeMultipartField($name, $contents));
         }
 
         return $this->request($url, 'POST', ['query' => $query, 'multipart' => $multipart]);
@@ -140,7 +140,8 @@ class Client
         $response = $this->performRequest($uri, $method, $options);
 
         return $this->castResponseToType(
-            $response, $returnRaw ? 'raw' : $this->config->getOption('response_type')
+            $response,
+            $returnRaw ? 'raw' : $this->config->getOption('response_type')
         );
     }
 
@@ -188,6 +189,27 @@ class Client
         $this->config = $config;
 
         return $this;
+    }
+
+    /**
+     * @param string $name
+     * @param mixed  $contents
+     *
+     * @return array
+     */
+    public function normalizeMultipartField(string $name, $contents) {
+        $field = [];
+
+        if (!is_array($contents)) {
+            return [compact('name', 'contents')];
+        } else {
+            foreach ($contents as $key => $value) {
+                $key = sprintf('%s[%s]', $name, $key);
+                $field = array_merge($field, is_array($value) ? $this->normalizeMultipartField($key, $value) : [['name' => $key, 'contents' => $value]]);
+            }
+        }
+
+        return $field;
     }
 
     /**

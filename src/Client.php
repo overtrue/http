@@ -107,17 +107,10 @@ class Client
     {
         $multipart = [];
 
-        foreach ($files as $name => $path) {
-            $multipart[] = [
-                'name' => $name,
-                'contents' => fopen($path, 'r'),
-            ];
+        foreach (\array_merge($files, $form) as $name => $contents) {
+            $multipart = array_merge($multipart, $this->normalizeMultipartField($name, $contents));
         }
-
-        foreach ($form as $name => $contents) {
-            $multipart = array_merge($multipart, $this->transformMultipartUploadData($name, $contents));
-        }
-
+        
         return $this->request($url, 'POST', ['query' => $query, 'multipart' => $multipart]);
     }
 
@@ -194,36 +187,24 @@ class Client
     }
 
     /**
-     * Transform Multipart Upload Data.
-     *
-     * @param string|int         $name
-     * @param string|array|mixed $contents
+     * @param string $name
+     * @param mixed  $contents
      *
      * @return array
      */
-    protected function transformMultipartUploadData($name, $contents)
-    {
-        if (!is_array($contents)) {
-            return [[
-                'name' => $name,
-                'contents' => $contents,
-            ]];
-        }
+    public function normalizeMultipartField(string $name, $contents) {
+        $field = [];
 
-        $datas = [];
-        foreach ($contents as $key => $value) {
-            $key = $name.'['.$key.']';
-            if (is_array($value)) {
-                $datas = array_merge($datas, $this->transformMultipartUploadData($key, $value));
-            } else {
-                $datas[] = [
-                    'name' => $key,
-                    'contents' => $value,
-                ];
+        if (!is_array($contents)) {
+            return [compact('name', 'contents')];
+        } else {
+            foreach ($contents as $key => $value) {
+                $key = sprintf('%s[%s]', $name, $key);
+                $field = array_merge($field, is_array($value) ? $this->normalizeMultipartField($key, $value) : [['name' => $key, 'contents' => $value]]);
             }
         }
 
-        return $datas;
+        return $field;
     }
 
     /**

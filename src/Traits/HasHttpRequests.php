@@ -145,9 +145,9 @@ trait HasHttpRequests
      * @param string $method
      * @param array  $options
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Overtrue\Http\Support\Collection|array|object|string
-     *
      * @throws \GuzzleHttp\Exception\GuzzleException
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\Overtrue\Http\Support\Collection|array|object|string
      */
     public function request($uri, $method = 'GET', $options = []): ResponseInterface
     {

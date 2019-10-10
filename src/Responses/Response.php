@@ -40,7 +40,7 @@ class Response extends GuzzleResponse
      *
      * @return \Overtrue\Http\Responses\Response
      */
-    public static function buildFromPsrResponse(ResponseInterface $response): \Overtrue\Http\Responses\Response
+    public static function buildFromPsrResponse(ResponseInterface $response): self
     {
         return new static(
             $response->getStatusCode(),

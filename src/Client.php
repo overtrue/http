@@ -59,9 +59,9 @@ class Client
      * @param string $url
      * @param array  $query
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Overtrue\Http\Support\Collection|array|object|string
-     *
      * @throws \GuzzleHttp\Exception\GuzzleException
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\Overtrue\Http\Support\Collection|array|object|string
      */
     public function get(string $url, array $query = [])
     {
@@ -74,9 +74,9 @@ class Client
      * @param string $url
      * @param array  $data
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Overtrue\Http\Support\Collection|array|object|string
-     *
      * @throws \GuzzleHttp\Exception\GuzzleException
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\Overtrue\Http\Support\Collection|array|object|string
      */
     public function post(string $url, array $data = [])
     {
@@ -90,9 +90,9 @@ class Client
      * @param string|array $data
      * @param array        $query
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Overtrue\Http\Support\Collection|array|object|string
-     *
      * @throws \GuzzleHttp\Exception\GuzzleException
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\Overtrue\Http\Support\Collection|array|object|string
      */
     public function postJson(string $url, array $data = [], array $query = [])
     {
@@ -107,9 +107,9 @@ class Client
      * @param array  $form
      * @param array  $query
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Overtrue\Http\Support\Collection|array|object|string
-     *
      * @throws \GuzzleHttp\Exception\GuzzleException
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\Overtrue\Http\Support\Collection|array|object|string
      */
     public function upload(string $url, array $files = [], array $form = [], array $query = [])
     {
@@ -133,9 +133,9 @@ class Client
      * @param array  $options
      * @param bool   $returnRaw
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Overtrue\Http\Support\Collection|array|object|string
-     *
      * @throws \GuzzleHttp\Exception\GuzzleException
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\Overtrue\Http\Support\Collection|array|object|string
      */
     public function request(string $uri, string $method = 'GET', array $options = [], $returnRaw = false)
     {
@@ -160,9 +160,9 @@ class Client
      * @param string $method
      * @param array  $options
      *
-     * @return array|object|\Overtrue\Http\Support\Collection|\Psr\Http\Message\ResponseInterface|string
-     *
      * @throws \GuzzleHttp\Exception\GuzzleException
+     *
+     * @return array|object|\Overtrue\Http\Support\Collection|\Psr\Http\Message\ResponseInterface|string
      */
     public function requestRaw(string $url, string $method = 'GET', array $options = [])
     {
@@ -196,7 +196,7 @@ class Client
      *
      * @return \Overtrue\Http\Client
      */
-    public function setConfig(\Overtrue\Http\Config $config): \Overtrue\Http\Client
+    public function setConfig(\Overtrue\Http\Config $config): self
     {
         $this->config = $config;
 

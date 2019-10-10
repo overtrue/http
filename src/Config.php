@@ -24,10 +24,10 @@ class Config
      * @var array
      */
     protected $options = [
-        'base_uri' => null,
-        'timeout' => 3000,
+        'base_uri'        => null,
+        'timeout'         => 3000,
         'connect_timeout' => 3000,
-        'proxy' => [],
+        'proxy'           => [],
     ];
 
     /**
@@ -58,7 +58,7 @@ class Config
      *
      * @return \Overtrue\Http\Config
      */
-    public function setBaseUri($baseUri): \Overtrue\Http\Config
+    public function setBaseUri($baseUri): self
     {
         $this->options['base_uri'] = $baseUri;
 
@@ -78,7 +78,7 @@ class Config
      *
      * @return \Overtrue\Http\Config
      */
-    public function setTimeout($timeout): \Overtrue\Http\Config
+    public function setTimeout($timeout): self
     {
         $this->options['timeout'] = $timeout;
 
@@ -98,7 +98,7 @@ class Config
      *
      * @return \Overtrue\Http\Config
      */
-    public function setConnectTimeout($connectTimeout): \Overtrue\Http\Config
+    public function setConnectTimeout($connectTimeout): self
     {
         $this->options['connect_timeout'] = $connectTimeout;
 
@@ -118,7 +118,7 @@ class Config
      *
      * @return \Overtrue\Http\Config
      */
-    public function setProxy(array $proxy): \Overtrue\Http\Config
+    public function setProxy(array $proxy): self
     {
         $this->options['proxy'] = $proxy;
 
@@ -139,7 +139,7 @@ class Config
      *
      * @return $this
      */
-    public function setOption($key, $value): \Overtrue\Http\Config
+    public function setOption($key, $value): self
     {
         $this->options[$key] = $value;
 
@@ -162,7 +162,7 @@ class Config
      *
      * @return $this
      */
-    public function mergeOptions(array $options): \Overtrue\Http\Config
+    public function mergeOptions(array $options): self
     {
         $this->options = array_merge($this->options, $options);
 
@@ -174,7 +174,7 @@ class Config
      *
      * @return $this
      */
-    public function setOptions(array $options): \Overtrue\Http\Config
+    public function setOptions(array $options): self
     {
         $this->options = $options;
 
@@ -200,7 +200,7 @@ class Config
     /**
      * @return $this
      */
-    public function disableAutoTrimEndpointSlash(): \Overtrue\Http\Config
+    public function disableAutoTrimEndpointSlash(): self
     {
         $this->autoTrimEndpointSlash = false;
 

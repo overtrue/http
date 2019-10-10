@@ -60,7 +60,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      *
      * @return \Overtrue\Http\Support\Collection
      */
-    public function only(array $keys): \Overtrue\Http\Support\Collection
+    public function only(array $keys): self
     {
         $return = [];
 
@@ -82,7 +82,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      *
      * @return \Overtrue\Http\Support\Collection
      */
-    public function except($keys): \Overtrue\Http\Support\Collection
+    public function except($keys): self
     {
         $keys = is_array($keys) ? $keys : func_get_args();
 
@@ -96,7 +96,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      *
      * @return \Overtrue\Http\Support\Collection
      */
-    public function merge($items): \Overtrue\Http\Support\Collection
+    public function merge($items): self
     {
         foreach ($items as $key => $value) {
             $this->set($key, $value);

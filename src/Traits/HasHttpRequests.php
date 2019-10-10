@@ -101,7 +101,7 @@ trait HasHttpRequests
      * Add a middleware.
      *
      * @param callable    $middleware
-     * @param null|string $name
+     * @param string|null $name
      *
      * @return $this
      */
@@ -146,6 +146,8 @@ trait HasHttpRequests
      * @param array  $options
      *
      * @return \Psr\Http\Message\ResponseInterface|\Overtrue\Http\Support\Collection|array|object|string
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function request($uri, $method = 'GET', $options = []): ResponseInterface
     {

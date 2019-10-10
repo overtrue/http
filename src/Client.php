@@ -60,6 +60,8 @@ class Client
      * @param array  $query
      *
      * @return \Psr\Http\Message\ResponseInterface|\Overtrue\Http\Support\Collection|array|object|string
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function get(string $url, array $query = [])
     {
@@ -73,6 +75,8 @@ class Client
      * @param array  $data
      *
      * @return \Psr\Http\Message\ResponseInterface|\Overtrue\Http\Support\Collection|array|object|string
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function post(string $url, array $data = [])
     {
@@ -87,6 +91,8 @@ class Client
      * @param array        $query
      *
      * @return \Psr\Http\Message\ResponseInterface|\Overtrue\Http\Support\Collection|array|object|string
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function postJson(string $url, array $data = [], array $query = [])
     {
@@ -102,6 +108,8 @@ class Client
      * @param array  $query
      *
      * @return \Psr\Http\Message\ResponseInterface|\Overtrue\Http\Support\Collection|array|object|string
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function upload(string $url, array $files = [], array $form = [], array $query = [])
     {
@@ -126,6 +134,8 @@ class Client
      * @param bool   $returnRaw
      *
      * @return \Psr\Http\Message\ResponseInterface|\Overtrue\Http\Support\Collection|array|object|string
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function request(string $uri, string $method = 'GET', array $options = [], $returnRaw = false)
     {
@@ -150,7 +160,9 @@ class Client
      * @param string $method
      * @param array  $options
      *
-     * @return \Overtrue\Http\Responses\Response
+     * @return array|object|\Overtrue\Http\Support\Collection|\Psr\Http\Message\ResponseInterface|string
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function requestRaw(string $url, string $method = 'GET', array $options = [])
     {
@@ -197,16 +209,16 @@ class Client
      *
      * @return array
      */
-    public function normalizeMultipartField(string $name, $contents) {
+    public function normalizeMultipartField(string $name, $contents)
+    {
         $field = [];
 
         if (!is_array($contents)) {
             return [compact('name', 'contents')];
-        } else {
-            foreach ($contents as $key => $value) {
-                $key = sprintf('%s[%s]', $name, $key);
-                $field = array_merge($field, is_array($value) ? $this->normalizeMultipartField($key, $value) : [['name' => $key, 'contents' => $value]]);
-            }
+        }
+        foreach ($contents as $key => $value) {
+            $key = sprintf('%s[%s]', $name, $key);
+            $field = array_merge($field, is_array($value) ? $this->normalizeMultipartField($key, $value) : [['name' => $key, 'contents' => $value]]);
         }
 
         return $field;

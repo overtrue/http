@@ -68,6 +68,12 @@ $config = new Config([
 
 ### Logging request and response
 
+Install monolog:
+
+```bash
+$ composer require monolog/monolog
+```
+Add logger middleware:
 
 ```php
 use Overtrue\Http\Client;

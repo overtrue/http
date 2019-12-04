@@ -188,22 +188,4 @@ class Config
     {
         return $this->options;
     }
-
-    /**
-     * @return bool
-     */
-    public function needAutoTrimEndpointSlash(): bool
-    {
-        return $this->autoTrimEndpointSlash;
-    }
-
-    /**
-     * @return $this
-     */
-    public function disableAutoTrimEndpointSlash(): self
-    {
-        $this->autoTrimEndpointSlash = false;
-
-        return $this;
-    }
 }

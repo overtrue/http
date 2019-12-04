@@ -262,6 +262,7 @@ class Client
      * @param string $uri
      * @param string $method
      * @param array  $options
+     * @param bool   $async
      *
      * @return \Psr\Http\Message\ResponseInterface|\Overtrue\Http\Support\Collection|array|object|string
      */
@@ -285,10 +286,6 @@ class Client
     {
         if (property_exists($this, 'baseUri') && !is_null($this->baseUri)) {
             $options['base_uri'] = $this->baseUri;
-        }
-
-        if ((!empty($options['base_uri']) || $this->config->getBaseUri()) && $this->config->needAutoTrimEndpointSlash()) {
-            $uri = ltrim($uri, '/');
         }
 
         return $this->performRequest($uri, $method, $options, $async);

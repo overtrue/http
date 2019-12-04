@@ -24,10 +24,10 @@ class Config
      * @var array
      */
     protected $options = [
-        'base_uri' => null,
-        'timeout' => 3000,
+        'base_uri'        => null,
+        'timeout'         => 3000,
         'connect_timeout' => 3000,
-        'proxy' => [],
+        'proxy'           => [],
     ];
 
     /**

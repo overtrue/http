@@ -90,9 +90,9 @@ trait HasHttpRequests
      * @param array  $options
      * @param bool   $async
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return \Psr\Http\Message\ResponseInterface|\GuzzleHttp\Promise\Promise
      */
-    public function request($uri, $method = 'GET', $options = [], bool $async = false): ResponseInterface
+    public function request($uri, $method = 'GET', $options = [], bool $async = false)
     {
         return $this->getHttpClient()->{ $async ? 'requestAsync' : 'request' }(strtoupper($method), $uri, array_merge(self::$defaults, $options));
     }

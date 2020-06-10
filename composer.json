@@ -11,9 +11,11 @@
         "ext-libxml": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.5 || ^8.0",
+        "phpunit/phpunit": "^6.5 || ^8.5",
         "mockery/mockery": "^1.0",
-        "overtrue/phplint": "^1.1 || ^2.0"
+        "overtrue/phplint": "^1.1 || ^2.0",
+        "brainmaestro/composer-git-hooks": "^2.7",
+        "friendsofphp/php-cs-fixer": "^2.15"
     },
     "autoload": {
         "psr-4": {
@@ -26,5 +28,24 @@
             "name": "overtrue",
             "email": "anzhengchao@gmail.com"
         }
-    ]
+    ],
+    "scripts": {
+        "post-update-cmd": [
+            "cghooks update"
+        ],
+        "post-merge": "composer install",
+        "post-install-cmd": [
+            "cghooks add --ignore-lock",
+            "cghooks update"
+        ],
+        "cghooks": "vendor/bin/cghooks",
+        "check-style": "php-cs-fixer fix --using-cache=no --diff --config=.php_cs --dry-run --ansi",
+        "fix-style": "php-cs-fixer fix --using-cache=no --config=.php_cs --ansi",
+        "test": "vendor/bin/phpunit --colors=always"
+    },
+    "scripts-descriptions": {
+        "test": "Run all tests.",
+        "check-style": "Run style checks (only dry run - no fixing!).",
+        "fix-style": "Run style checks and fix violations."
+    }
 }

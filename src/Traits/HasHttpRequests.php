@@ -13,7 +13,6 @@ namespace Overtrue\Http\Traits;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
-use Psr\Http\Message\ResponseInterface;
 
 /**
  * Trait HasHttpRequests.

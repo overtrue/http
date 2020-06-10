@@ -264,14 +264,17 @@ class Client
      * @param array  $options
      * @param bool   $async
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Overtrue\Http\Support\Collection|array|object|string
+     * @return \Psr\Http\Message\ResponseInterface|\GuzzleHttp\Promise\PromiseInterface|\Overtrue\Http\Support\Collection|array|object|string
      */
     public function request(string $uri, string $method = 'GET', array $options = [], bool $async = false)
     {
-        return $this->castResponseToType(
-            $this->requestRaw($uri, $method, $options, $async),
-            $this->config->getOption('response_type')
-        );
+        $result = $this->requestRaw($uri, $method, $options, $async);
+
+        $transformer = function ($response) {
+            return $this->castResponseToType($response, $this->config->getOption('response_type'));
+        };
+
+        return $async ? $result->then($transformer) : $transformer($result);
     }
 
     /**
@@ -280,7 +283,7 @@ class Client
      * @param array  $options
      * @param bool   $async
      *
-     * @return array|object|\Overtrue\Http\Support\Collection|\Psr\Http\Message\ResponseInterface|string
+     * @return \Psr\Http\Message\ResponseInterface|\GuzzleHttp\Promise\PromiseInterface|\Overtrue\Http\Support\Collection|array|object|string
      */
     public function requestRaw(string $uri, string $method = 'GET', array $options = [], bool $async = false)
     {

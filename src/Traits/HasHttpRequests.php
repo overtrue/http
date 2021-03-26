@@ -29,7 +29,7 @@ trait HasHttpRequests
      */
     protected static $defaults = [
         'curl' => [
-            CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
+            'CURLOPT_IPRESOLVE' => 'CURL_IPRESOLVE_V4',
         ],
     ];
 

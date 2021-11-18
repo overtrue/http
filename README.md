@@ -10,10 +10,11 @@
 <a href="https://packagist.org/packages/overtrue/http"><img src="https://poser.pugx.org/overtrue/http/v/unstable.svg" alt="Latest Unstable Version"></a>
 <a href="https://scrutinizer-ci.com/g/overtrue/http/build-status/master"><img src="https://scrutinizer-ci.com/g/overtrue/http/badges/build.png?b=master" alt="Build Status"></a>
 <a href="https://scrutinizer-ci.com/g/overtrue/http/?branch=master"><img src="https://scrutinizer-ci.com/g/overtrue/http/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality"></a>
-<a href="https://scrutinizer-ci.com/g/overtrue/http/?branch=master"><img src="https://scrutinizer-ci.com/g/overtrue/http/badges/coverage.png?b=master" alt="Code Coverage"></a>
 <a href="https://packagist.org/packages/overtrue/http"><img src="https://poser.pugx.org/overtrue/http/downloads" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/overtrue/http"><img src="https://poser.pugx.org/overtrue/http/license" alt="License"></a>
 </p>
+
+[![Sponsor me](https://raw.githubusercontent.com/overtrue/overtrue/master/sponsor-me-button-s.svg)](https://github.com/sponsors/overtrue)
 
 ## Installing
 
@@ -100,7 +101,7 @@ $response = $client->get('https://httpbin.org/ip');
 
 ## :heart: Sponsor me 
 
-If you like the work I do and want to support it, [you know what to do :heart:](https://github.com/sponsors/overtrue)
+[![Sponsor me](https://raw.githubusercontent.com/overtrue/overtrue/master/sponsor-me.svg)](https://github.com/sponsors/overtrue)
 
 如果你喜欢我的项目并想支持它，[点击这里 :heart:](https://github.com/sponsors/overtrue)
 

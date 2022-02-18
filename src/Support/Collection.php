@@ -424,6 +424,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      */
     public static function __set_state($array): object
     {
+        $obj = new Object();
         foreach($array as $k => $v){
             $obj->{$k} = $v;
         }

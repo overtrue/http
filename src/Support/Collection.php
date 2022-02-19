@@ -1,3 +1,4 @@
+
 <?php
 
 /*
@@ -419,11 +420,13 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
     /**
      * var_export.
      *
-     * @return array
+     * @param array properties
+     * 
+     * @return object
      */
-    public function __set_state(): array
+    public static function __set_state($array): object
     {
-        return $this->all();
+        return new self($array);
     }
 
     /**

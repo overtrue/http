@@ -234,7 +234,7 @@ class Client
         $multipart = [];
 
         foreach ($files as $name => $contents) {
-            $contents = \is_resource($contents) ?: \fopen($contents, 'r');
+            $contents = \is_resource($contents) ? $contents : \fopen($contents, 'r');
             $multipart[] = \compact('name', 'contents');
         }
 

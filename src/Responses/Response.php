@@ -1,14 +1,5 @@
 <?php
 
-/*
- * This file is part of the overtrue/http.
- *
- * (c) overtrue <i@overtrue.me>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
 namespace Overtrue\Http\Responses;
 
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
@@ -16,16 +7,8 @@ use Overtrue\Http\Support\Collection;
 use Overtrue\Http\Support\XML;
 use Psr\Http\Message\ResponseInterface;
 
-/**
- * Class Response.
- *
- * @author overtrue <i@overtrue.me>
- */
 class Response extends GuzzleResponse
 {
-    /**
-     * @return string
-     */
     public function getBodyContents(): string
     {
         $this->getBody()->rewind();
@@ -35,11 +18,6 @@ class Response extends GuzzleResponse
         return $contents;
     }
 
-    /**
-     * @param \Psr\Http\Message\ResponseInterface $response
-     *
-     * @return \Overtrue\Http\Responses\Response
-     */
     public static function buildFromPsrResponse(ResponseInterface $response): self
     {
         return new static(
@@ -51,21 +29,11 @@ class Response extends GuzzleResponse
         );
     }
 
-    /**
-     * Build to json.
-     *
-     * @return string
-     */
     public function toJson(): string
     {
         return json_encode($this->toArray());
     }
 
-    /**
-     * Build to array.
-     *
-     * @return array
-     */
     public function toArray(): array
     {
         $content = $this->getBodyContents();
@@ -83,27 +51,16 @@ class Response extends GuzzleResponse
         return [];
     }
 
-    /**
-     * Get collection data.
-     *
-     * @return \Overtrue\Http\Support\Collection
-     */
-    public function toCollection(): \Overtrue\Http\Support\Collection
+    public function toCollection(): Collection
     {
         return new Collection($this->toArray());
     }
 
-    /**
-     * @return object
-     */
     public function toObject(): object
     {
         return json_decode($this->getBodyContents());
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return $this->getBodyContents();

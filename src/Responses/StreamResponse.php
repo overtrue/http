@@ -1,33 +1,13 @@
 <?php
 
-/*
- * This file is part of the overtrue/http.
- *
- * (c) overtrue <i@overtrue.me>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
 namespace Overtrue\Http\Responses;
 
 use Overtrue\Http\Exceptions\InvalidArgumentException;
-use Overtrue\Http\Support\File;
 
-/**
- * Class StreamResponse.
- *
- * @author overtrue <i@overtrue.me>
- */
 class StreamResponse extends Response
 {
     /**
-     * @param string $directory
-     * @param string $filename
-     *
      * @throws \Overtrue\Http\Exceptions\InvalidArgumentException
-     *
-     * @return string
      */
     public function save(string $directory, string $filename = ''): string
     {
@@ -63,12 +43,7 @@ class StreamResponse extends Response
     }
 
     /**
-     * @param string $directory
-     * @param string $filename
-     *
      * @throws \Overtrue\Http\Exceptions\InvalidArgumentException
-     *
-     * @return string
      */
     public function saveAs(string $directory, string $filename): string
     {

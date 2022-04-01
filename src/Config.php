@@ -1,189 +1,105 @@
 <?php
 
-/*
- * This file is part of the overtrue/http.
- *
- * (c) overtrue <i@overtrue.me>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
 namespace Overtrue\Http;
 
-/**
- * Class Config.
- *
- * @author overtrue <i@overtrue.me>
- */
 class Config
 {
     /**
      * @see http://docs.guzzlephp.org/en/latest/request-options.html
-     *
-     * @var array
      */
-    protected $options = [
+    protected array $options = [
         'base_uri' => null,
         'timeout' => 3000,
         'connect_timeout' => 3000,
         'proxy' => [],
     ];
 
-    /**
-     * @var bool
-     */
-    protected $autoTrimEndpointSlash = true;
+    protected bool $autoTrimEndpointSlash = true;
 
-    /**
-     * Config constructor.
-     *
-     * @param array $options
-     */
     public function __construct(array $options = [])
     {
         $this->options = array_merge($this->options, $options);
     }
 
-    /**
-     * @return string
-     */
     public function getBaseUri(): string
     {
         return $this->options['base_uri'] ?? '';
     }
 
-    /**
-     * @param string $baseUri
-     *
-     * @return \Overtrue\Http\Config
-     */
-    public function setBaseUri($baseUri): self
+    public function setBaseUri(string $baseUri): static
     {
         $this->options['base_uri'] = $baseUri;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getTimeout(): int
     {
         return $this->options['timeout'] ?? 3000;
     }
 
-    /**
-     * @param int $timeout
-     *
-     * @return \Overtrue\Http\Config
-     */
-    public function setTimeout($timeout): self
+    public function setTimeout(float|int $timeout): static
     {
         $this->options['timeout'] = $timeout;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getConnectTimeout(): int
     {
         return $this->options['connect_timeout'] ?? 3000;
     }
 
-    /**
-     * @param int $connectTimeout
-     *
-     * @return \Overtrue\Http\Config
-     */
-    public function setConnectTimeout($connectTimeout): self
+    public function setConnectTimeout(float|int $connectTimeout): static
     {
         $this->options['connect_timeout'] = $connectTimeout;
 
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function getProxy(): array
     {
         return $this->options['proxy'] ?? [];
     }
 
-    /**
-     * @param array $proxy
-     *
-     * @return \Overtrue\Http\Config
-     */
-    public function setProxy(array $proxy): self
+    public function setProxy(array $proxy): static
     {
         $this->options['proxy'] = $proxy;
 
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         return $this->options;
     }
 
-    /**
-     * @param string $key
-     * @param mixed  $value
-     *
-     * @return $this
-     */
-    public function setOption($key, $value): self
+    public function setOption(string $key, mixed $value): static
     {
         $this->options[$key] = $value;
 
         return $this;
     }
 
-    /**
-     * @param string $key
-     * @param mixed  $default
-     *
-     * @return mixed
-     */
-    public function getOption($key, $default = null)
+    public function getOption(string $key, mixed $default = null)
     {
         return $this->options[$key] ?? $default;
     }
 
-    /**
-     * @param array $options
-     *
-     * @return $this
-     */
-    public function mergeOptions(array $options): self
+    public function mergeOptions(array $options): static
     {
         $this->options = array_merge($this->options, $options);
 
         return $this;
     }
 
-    /**
-     * @param array $options
-     *
-     * @return $this
-     */
-    public function setOptions(array $options): self
+    public function setOptions(array $options): static
     {
         $this->options = $options;
 
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function getOptions(): array
     {
         return $this->options;
